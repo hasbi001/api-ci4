@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\Pegawai;
+use App\Models\PegawaiModel;
 
-class PegawaiController extends ResourceController
+class Pegawai extends ResourceController
 {
     use ResponseTrait;  
     /**
@@ -16,7 +16,7 @@ class PegawaiController extends ResourceController
      */
     public function index()
     {
-        $model = new Pegawai();
+        $model = new PegawaiModel();
         // $limit = $this->request->getVar('limit');
         // $offset = $this->request->getVar('offset');
         $item = $model->where('deletedAt',null)->findAll();
@@ -36,7 +36,7 @@ class PegawaiController extends ResourceController
      */
     public function show($id = null)
     {
-        $model = new Pegawai();
+        $model = new PegawaiModel();
         $model->where('deletedAt',null);
         $data = $model->find(['id'  => $id]);
         if (!$data) {
@@ -88,7 +88,7 @@ class PegawaiController extends ResourceController
             'endDate' => $this->request->getVar('endDate')
         ];
 
-        $model = new Pegawai();
+        $model = new PegawaiModel();
         $model->save($data);
         $response = [
             'status' => 201,
@@ -144,7 +144,7 @@ class PegawaiController extends ResourceController
             
         }
 
-        $model = new Pegawai();
+        $model = new PegawaiModel();
         $find = $model->find(['id' => $id]);
         if(!$find){
             $response = [
@@ -174,7 +174,7 @@ class PegawaiController extends ResourceController
      */
     public function delete($id = null)
     {
-        $model = new Pegawai();
+        $model = new PegawaiModel();
         $find = $model->find(['id' => $id]);
         if(!$find){
             $response = [

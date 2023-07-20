@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\Users;
+use App\Models\UsersModel;
 
-class UserController extends ResourceController
+class User extends ResourceController
 {
     use ResponseTrait;  
     /**
@@ -16,7 +16,7 @@ class UserController extends ResourceController
      */
     public function index()
     {
-        $model = new Users();
+        $model = new UsersModel();
         // $limit = $this->request->getVar('limit');
         // $offset = $this->request->getVar('offset');
         $item = $model->where('deletedAt',null)->findAll();
@@ -36,7 +36,7 @@ class UserController extends ResourceController
      */
     public function show($id = null)
     {
-        $model = new Users();
+        $model = new UsersModel();
         $model->where('deletedAt',null);
         $data = $model->find(['id'  => $id]);
         if (!$data) {
@@ -86,7 +86,7 @@ class UserController extends ResourceController
             
         }
         
-        $model = new Users();
+        $model = new UsersModel();
         $model->save($data);
         $response = [
             'status' => 201,
@@ -131,7 +131,7 @@ class UserController extends ResourceController
             
         }
 
-        $model = new Users();
+        $model = new UsersModel();
         $find = $model->find(['id' => $id]);
         if(!$find){
             $response = [
@@ -161,7 +161,7 @@ class UserController extends ResourceController
      */
     public function delete($id = null)
     {
-        $model = new users();
+        $model = new UsersModel();
         $find = $model->find(['id' => $id]);
         if(!$find){
             $response = [
@@ -188,7 +188,7 @@ class UserController extends ResourceController
     }
 
     public function option() {
-        $model = new Users();
+        $model = new UsersModel();
         $model->where('deletedAt',null)->findAll();
         $option = [];
         foreach ($model as $value) {

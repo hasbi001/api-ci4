@@ -4,16 +4,16 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\Users;
+use App\Models\UsersModel;
 use \Firebase\JWT\JWT;
 
-class AuthController extends BaseController
+class Auth extends BaseController
 {
     use ResponseTrait;
 
     public function login()
     {
-        $userModel = new Users();
+        $userModel = new UsersModel();
   
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
@@ -63,7 +63,7 @@ class AuthController extends BaseController
         ]; 
 
         if($this->validate($rules)){
-            $model = new Users();
+            $model = new UsersModel();
             $data = [
                 'email'    => $this->request->getVar('email'),
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
